@@ -17,13 +17,13 @@ interface ResultSearchProps {
 }
 
 const ResultSearch: React.FC<ResultSearchProps> = ({ onResultFound }) => {
-  const { exams, regulations, findStudentResult } = useAppContext();
+  const { exams, regulations, findStudentResult, searchPdfResults } = useAppContext();
   const [selectedExam, setSelectedExam] = useState<string>("");
   const [selectedRegulation, setSelectedRegulation] = useState<string>("");
   const [rollNumber, setRollNumber] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!selectedExam) {
       toast.error("Please select an exam");
       return;
@@ -39,19 +39,40 @@ const ResultSearch: React.FC<ResultSearchProps> = ({ onResultFound }) => {
 
     setIsSearching(true);
 
-    // Simulate a search delay
-    setTimeout(() => {
-      const result = findStudentResult(selectedExam, selectedRegulation, rollNumber);
+    try {
+      // First search in mock data
+      const mockResult = findStudentResult(selectedExam, selectedRegulation, rollNumber);
       
-      if (result) {
-        onResultFound(result);
+      if (mockResult) {
+        onResultFound(mockResult);
         toast.success("Result found");
+        setIsSearching(false);
+        return;
+      }
+      
+      // If not found in mock data, search PDFs
+      const pdfResult = await searchPdfResults(selectedExam, selectedRegulation, rollNumber);
+      
+      if (pdfResult && pdfResult.found) {
+        // Create a formatted result object from PDF search
+        const formattedResult = {
+          type: "pdf",
+          roll: pdfResult.roll,
+          subjects: pdfResult.subjects,
+          found: true
+        };
+        
+        onResultFound(formattedResult);
+        toast.success("Result found in PDF");
       } else {
         toast.error("No result found for the given information");
       }
-      
+    } catch (error) {
+      console.error("Search error:", error);
+      toast.error("An error occurred while searching for results");
+    } finally {
       setIsSearching(false);
-    }, 1500);
+    }
   };
 
   return (

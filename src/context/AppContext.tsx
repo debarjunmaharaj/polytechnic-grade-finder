@@ -1,6 +1,6 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
+import { searchRollInPdf } from "@/utils/pdfParser";
 
 interface ResultFile {
   id: string;
@@ -29,6 +29,12 @@ interface StudentResult {
   status: string;
 }
 
+interface PDFSearchResult {
+  roll: string;
+  subjects: string;
+  found: boolean;
+}
+
 interface AppContextType {
   isLoggedIn: boolean;
   login: (username: string, password: string) => boolean;
@@ -37,6 +43,7 @@ interface AppContextType {
   addResultFile: (file: Omit<ResultFile, "id" | "uploadedAt">) => void;
   deleteResultFile: (id: string) => void;
   findStudentResult: (exam: string, regulation: string, roll: string) => StudentResult | null;
+  searchPdfResults: (exam: string, regulation: string, roll: string) => Promise<PDFSearchResult | null>;
   exams: string[];
   regulations: string[];
   years: string[];
@@ -157,6 +164,34 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ) || null;
   };
 
+  const searchPdfResults = async (exam: string, regulation: string, roll: string): Promise<PDFSearchResult | null> => {
+    // Find matching result file
+    const matchingFile = resultFiles.find(
+      file => file.exam === exam && file.regulation === regulation
+    );
+    
+    if (!matchingFile) {
+      toast.error("No matching result file found");
+      return null;
+    }
+    
+    try {
+      toast.info("Searching PDF for results...");
+      const result = await searchRollInPdf(matchingFile.url, roll);
+      
+      if (!result.found) {
+        toast.error("Roll number not found in the PDF");
+        return null;
+      }
+      
+      return result;
+    } catch (error) {
+      console.error("Error searching PDF:", error);
+      toast.error("Failed to search PDF file");
+      return null;
+    }
+  };
+
   // Extract unique exams, regulations, and years from result files
   const exams = Array.from(new Set(resultFiles.map((file) => file.exam)));
   const regulations = Array.from(new Set(resultFiles.map((file) => file.regulation)));
@@ -172,6 +207,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addResultFile,
         deleteResultFile,
         findStudentResult,
+        searchPdfResults,
         exams,
         regulations,
         years,
