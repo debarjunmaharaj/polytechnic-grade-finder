@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Welcome to your polytechnic-grade-finder project
 
 ## Project info
 
@@ -7,12 +7,6 @@
 ## How can I edit this code?
 
 There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/8817d5fc-fb12-4297-b56d-4707a794f010) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
