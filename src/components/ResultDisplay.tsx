@@ -55,29 +55,30 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, onReset }) => {
   const renderContent = () => {
     if (isPdfResult) {
       // Render PDF result
+      const pdfResult = result as PDFResult;
       return (
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-4 mb-6">
             <div>
               <p className="text-sm text-gray-500">Roll Number</p>
-              <p className="font-medium">{result.roll}</p>
+              <p className="font-medium">{pdfResult.roll}</p>
             </div>
             <div>
               <p className="text-sm text-gray-500">PDF Result Data</p>
               <div className="p-4 bg-gray-50 border rounded-md mt-2 font-mono text-sm whitespace-pre-wrap break-all">
-                {result.roll} {result.subjects}
+                {pdfResult.roll} {pdfResult.subjects}
               </div>
             </div>
             <div className="border-t pt-4">
               <h3 className="font-medium text-bteb-primary mb-2">Subject Details</h3>
-              {result.subjects.includes('{') && result.subjects.includes('}') ? (
+              {pdfResult.subjects.includes('{') && pdfResult.subjects.includes('}') ? (
                 <div>
                   <p className="mb-2">Parsed Subjects:</p>
                   <ul className="list-disc pl-5 space-y-1">
-                    {result.subjects
+                    {pdfResult.subjects
                       .substring(
-                        result.subjects.indexOf('{') + 1, 
-                        result.subjects.lastIndexOf('}')
+                        pdfResult.subjects.indexOf('{') + 1, 
+                        pdfResult.subjects.lastIndexOf('}')
                       )
                       .split(',')
                       .map((subject, index) => (
@@ -87,7 +88,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, onReset }) => {
                 </div>
               ) : (
                 <p className="text-gray-600">
-                  Raw subject data: {result.subjects}
+                  Raw subject data: {pdfResult.subjects}
                 </p>
               )}
             </div>
