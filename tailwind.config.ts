@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -91,11 +90,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'slide': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(-100%)' }
+				},
+				'pulse-highlight': {
+					'0%, 100%': { 
+						opacity: '1',
+						transform: 'scale(1)' 
+					},
+					'50%': { 
+						opacity: '0.8',
+						transform: 'scale(1.05)' 
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-highlight': 'pulse-highlight 2s ease-in-out infinite'
 			}
 		}
 	},

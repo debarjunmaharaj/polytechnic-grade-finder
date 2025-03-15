@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ResultSearch from "@/components/ResultSearch";
 import ResultDisplay from "@/components/ResultDisplay";
+import LatestResultsSection from "@/components/LatestResultsSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
@@ -87,113 +88,117 @@ const Index = () => {
           )}
           
           {!searchResult && (
-            <div className="mt-16 max-w-5xl mx-auto">
-              <Separator className="my-8" />
+            <>
+              <LatestResultsSection />
               
-              <Tabs defaultValue="about" className="w-full">
-                <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 h-auto mb-6">
-                  <TabsTrigger value="about" className="flex items-center py-2">
-                    <BookOpen className="h-4 w-4 mr-2" />
-                    <span>About Results</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="exams" className="flex items-center py-2">
-                    <GraduationCap className="h-4 w-4 mr-2" />
-                    <span>Available Exams</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="help" className="flex items-center py-2">
-                    <Info className="h-4 w-4 mr-2" />
-                    <span>Help</span>
-                  </TabsTrigger>
-                </TabsList>
+              <div className="mt-16 max-w-5xl mx-auto">
+                <Separator className="my-8" />
                 
-                <TabsContent value="about" className="space-y-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <h3 className="text-xl font-semibold mb-3">Individual's Results (Explained)</h3>
-                      <p className="text-gray-700 mb-4">
-                        Individual result in this app refers to all the semester results of a single diploma/polytechnic student
-                        published by the Bangladesh Technical Education Board (BTEB)
-                      </p>
-                      
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="text-lg font-medium mb-2">Roll Number</h4>
-                          <p className="text-gray-700">
-                            The roll number is the 6-digit number on your admit card or registration card.
-                          </p>
-                        </div>
+                <Tabs defaultValue="about" className="w-full">
+                  <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 h-auto mb-6">
+                    <TabsTrigger value="about" className="flex items-center py-2">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      <span>About Results</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="exams" className="flex items-center py-2">
+                      <GraduationCap className="h-4 w-4 mr-2" />
+                      <span>Available Exams</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="help" className="flex items-center py-2">
+                      <Info className="h-4 w-4 mr-2" />
+                      <span>Help</span>
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="about" className="space-y-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-xl font-semibold mb-3">Individual's Results (Explained)</h3>
+                        <p className="text-gray-700 mb-4">
+                          Individual result in this app refers to all the semester results of a single diploma/polytechnic student
+                          published by the Bangladesh Technical Education Board (BTEB)
+                        </p>
                         
-                        <div>
-                          <h4 className="text-lg font-medium mb-2">The Exam Options</h4>
-                          <p className="text-gray-700">
-                            The exam name option refers to the curriculum name of your diploma or polytechnic exam under the
-                            Bangladesh Technical Education Board (BTEB). By default "Diploma In Engineering" is selected. So if
-                            your exam is different from the default, make sure you select the right exam name before you hit the
-                            "View Result" button.
-                          </p>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="text-lg font-medium mb-2">Roll Number</h4>
+                            <p className="text-gray-700">
+                              The roll number is the 6-digit number on your admit card or registration card.
+                            </p>
+                          </div>
+                          
+                          <div>
+                            <h4 className="text-lg font-medium mb-2">The Exam Options</h4>
+                            <p className="text-gray-700">
+                              The exam name option refers to the curriculum name of your diploma or polytechnic exam under the
+                              Bangladesh Technical Education Board (BTEB). By default "Diploma In Engineering" is selected. So if
+                              your exam is different from the default, make sure you select the right exam name before you hit the
+                              "View Result" button.
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                
-                <TabsContent value="exams" className="space-y-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <h3 className="text-xl font-semibold mb-3">Available Exams Results</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                        <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                          <li>Diploma in Engineering</li>
-                          <li>Diploma in Engineering (Army)</li>
-                          <li>Diploma in Engineering (Naval)</li>
-                          <li>Diploma in Tourism And Hospitality</li>
-                          <li>Diploma in Textile Engineering</li>
-                          <li>Diploma in Agriculture</li>
-                          <li>Diploma in Fisheries</li>
-                          <li>Diploma in Forestry</li>
-                        </ul>
-                        <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                          <li>Diploma in Livestock</li>
-                          <li>Diploma in Medical Technology</li>
-                          <li>Certificate in Medical Ultrasound</li>
-                          <li>Diploma in Commerce</li>
-                          <li>Certificate in Marine Trade</li>
-                          <li>Advanced Certificate Course</li>
-                          <li>HSC (Business Management)</li>
-                          <li>HSC (Vocational)</li>
-                        </ul>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                
-                <TabsContent value="help" className="space-y-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <h3 className="text-xl font-semibold mb-3">Help & Support</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="text-lg font-medium mb-2">Common Issues</h4>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="exams" className="space-y-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-xl font-semibold mb-3">Available Exams Results</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                           <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                            <li>If your result shows "No Result Found", double-check your roll number and exam details</li>
-                            <li>Make sure you've selected the correct exam type for your diploma program</li>
-                            <li>Results are typically available within 48 hours of official publication</li>
+                            <li>Diploma in Engineering</li>
+                            <li>Diploma in Engineering (Army)</li>
+                            <li>Diploma in Engineering (Naval)</li>
+                            <li>Diploma in Tourism And Hospitality</li>
+                            <li>Diploma in Textile Engineering</li>
+                            <li>Diploma in Agriculture</li>
+                            <li>Diploma in Fisheries</li>
+                            <li>Diploma in Forestry</li>
+                          </ul>
+                          <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Diploma in Livestock</li>
+                            <li>Diploma in Medical Technology</li>
+                            <li>Certificate in Medical Ultrasound</li>
+                            <li>Diploma in Commerce</li>
+                            <li>Certificate in Marine Trade</li>
+                            <li>Advanced Certificate Course</li>
+                            <li>HSC (Business Management)</li>
+                            <li>HSC (Vocational)</li>
                           </ul>
                         </div>
-                        
-                        <div>
-                          <h4 className="text-lg font-medium mb-2">Contact Support</h4>
-                          <p className="text-gray-700">
-                            If you continue to experience issues, please contact your institute's examination department
-                            or reach out to the BTEB support team directly.
-                          </p>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="help" className="space-y-4">
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-xl font-semibold mb-3">Help & Support</h3>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="text-lg font-medium mb-2">Common Issues</h4>
+                            <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                              <li>If your result shows "No Result Found", double-check your roll number and exam details</li>
+                              <li>Make sure you've selected the correct exam type for your diploma program</li>
+                              <li>Results are typically available within 48 hours of official publication</li>
+                            </ul>
+                          </div>
+                          
+                          <div>
+                            <h4 className="text-lg font-medium mb-2">Contact Support</h4>
+                            <p className="text-gray-700">
+                              If you continue to experience issues, please contact your institute's examination department
+                              or reach out to the BTEB support team directly.
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </>
           )}
         </div>
       </main>

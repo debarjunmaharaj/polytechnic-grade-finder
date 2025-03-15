@@ -25,12 +25,24 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full">
-      <div className="bg-bteb-primary text-white">
-        <div className="container flex items-center justify-between py-3">
-          <Link to="/" className="text-xl font-bold">BTEB Results Zone</Link>
+    <header className="w-full shadow-md">
+      <div className="bg-gradient-to-r from-bteb-primary to-bteb-secondary text-white">
+        <div className="container flex items-center justify-between py-2">
+          <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center">
+              <img 
+                src="https://netfie.com/wp-content/uploads/2025/03/Netfie__1_-removebg-preview-450x174.png.webp" 
+                alt="Netfie Logo" 
+                className="h-10 md:h-12"
+              />
+              <div className="ml-3 border-l-2 border-white pl-3">
+                <span className="text-xl font-bold block">BTEB Results Zone</span>
+                <span className="text-xs opacity-80">Bangladesh Technical Education Board</span>
+              </div>
+            </Link>
+          </div>
           
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {isLoggedIn && (
               <Link to="/admin">
                 <Button variant="outline" size="sm" className="text-white border-white hover:bg-bteb-secondary">
@@ -64,7 +76,9 @@ const Header = () => {
             >
               {link.icon}
               {link.name}
-              {link.name === "Point Results" && <span className="ml-1 text-xs bg-bteb-accent text-black px-1 rounded">New</span>}
+              {link.name === "Point Results" && (
+                <span className="ml-1 text-xs bg-bteb-accent text-black px-1 rounded animate-pulse">New</span>
+              )}
             </Link>
           ))}
         </div>
@@ -85,7 +99,9 @@ const Header = () => {
                 >
                   {link.icon}
                   {link.name}
-                  {link.name === "Point Results" && <span className="ml-1 text-xs bg-bteb-accent text-black px-1 rounded">New</span>}
+                  {link.name === "Point Results" && (
+                    <span className="ml-1 text-xs bg-bteb-accent text-black px-1 rounded animate-pulse">New</span>
+                  )}
                 </Link>
               ))}
               
@@ -113,10 +129,12 @@ const Header = () => {
         )}
       </nav>
       
-      {/* Notification bar */}
-      <div className="bg-bteb-light text-bteb-primary p-2 text-sm text-center">
-        রেজাল্টের নতুন ফরম্যাটে কারো ডাটাবেজে ডাউনলোড করতে এবং মুদ্রণ করার মেনু পাবেন। ভাই আপনাকে এডমিনকে ধন্যবাদ।
-        <a href="#" className="text-blue-600 hover:underline ml-1">PDF ডাউনলোড করুন</a>
+      {/* Notification bar with animation */}
+      <div className="bg-bteb-light text-bteb-primary p-2 text-sm text-center relative overflow-hidden">
+        <div className="animate-[slide_15s_linear_infinite]">
+          রেজাল্টের নতুন ফরম্যাটে কারো ডাটাবেজে ডাউনলোড করতে এবং মুদ্রণ করার মেনু পাবেন। ভাই আপনাকে এডমিনকে ধন্যবাদ।
+          <a href="#" className="text-blue-600 hover:underline ml-1">PDF ডাউনলোড করুন</a>
+        </div>
       </div>
     </header>
   );
